@@ -2,226 +2,183 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>最強への道 実行ナビ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0f1715">
+    <title>最強への道</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div class="app-shell">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">12週間コンディショニング</p>
-          <h1>最強への道 実行ナビ</h1>
+    <div class="app" id="app">
+
+      <!-- HOME -->
+      <section class="view view--home active" data-view="home">
+        <header class="hero">
+          <p class="hero__eyebrow">最強への道</p>
+          <h1 class="hero__title" id="homeRecommendTitle">朝起動 5分</h1>
+          <p class="hero__sub" id="homeRecommendSub">普通の日の標準</p>
+          <p class="hero__motto">翌日も戻れる強さ</p>
+        </header>
+
+        <div class="status-chip" id="homeStatusChip">
+          <span class="status-chip__dot"></span>
+          <span class="status-chip__text">緑判定</span>
         </div>
-        <div class="top-actions" aria-label="主要操作">
-          <button class="icon-button" id="resetDayButton" type="button" title="今日の進捗をリセット">リセット</button>
-          <button class="primary-button" id="resumeButton" type="button">続きから</button>
+
+        <button class="cta" id="goRunButton" type="button">
+          <span class="cta__main">今すぐ始める</span>
+          <span class="cta__sub" id="homeStepCount">6 ステップ・約5分</span>
+        </button>
+
+        <div class="home-grid">
+          <button class="tile" data-go="check" type="button">
+            <span class="tile__icon">●</span>
+            <span class="tile__label">今日の判定</span>
+          </button>
+          <button class="tile" data-go="menu" type="button">
+            <span class="tile__icon">≡</span>
+            <span class="tile__label">メニュー</span>
+          </button>
+          <button class="tile" data-go="oshikura" type="button">
+            <span class="tile__icon">◯</span>
+            <span class="tile__label">押し蔵くん</span>
+          </button>
+          <button class="tile" data-go="week" type="button">
+            <span class="tile__icon">12</span>
+            <span class="tile__label">12週プラン</span>
+          </button>
         </div>
-      </header>
 
-      <main class="layout">
-        <aside class="control-rail" aria-label="今日の条件">
-          <section class="panel status-panel">
-            <div class="section-heading">
-              <p class="eyebrow">毎朝30秒</p>
-              <h2>今日の判定</h2>
-            </div>
-            <fieldset class="check-list">
-              <legend>該当するもの</legend>
-              <label class="check-row">
-                <input type="checkbox" id="checkHrv">
-                <span>HRVが7日平均から15%以上落ちた</span>
-              </label>
-              <label class="check-row">
-                <input type="checkbox" id="checkSleep">
-                <span>睡眠が6時間未満</span>
-              </label>
-              <label class="check-row">
-                <input type="checkbox" id="checkPain">
-                <span>首肩痛が4/10以上</span>
-              </label>
-              <label class="check-row danger-row">
-                <input type="checkbox" id="checkMigraine">
-                <span>片頭痛前兆、首から上の違和感</span>
-              </label>
-            </fieldset>
-            <div class="status-readout" id="statusReadout">
-              <span class="status-dot"></span>
-              <div>
-                <strong id="statusLabel">緑判定</strong>
-                <p id="statusText">普通に実行。朝起動5分が基準。</p>
-              </div>
-            </div>
-          </section>
+        <details class="note-collapse">
+          <summary>今日の3行記録</summary>
+          <div class="note-body">
+            <label>代表場面<input id="noteScene" type="text" placeholder="1つだけ"></label>
+            <label>原因
+              <select id="noteCause">
+                <option value="">選ぶ</option>
+                <option>距離</option><option>視線</option><option>足</option><option>呼吸</option><option>力み</option>
+              </select>
+            </label>
+            <label>次回試すこと<input id="noteNext" type="text" placeholder="1つだけ"></label>
+          </div>
+        </details>
 
-          <section class="panel">
-            <div class="section-heading compact">
-              <p class="eyebrow">進め方</p>
-              <h2>週と曜日</h2>
-            </div>
-            <label class="select-label" for="weekSelect">今の週</label>
-            <select id="weekSelect" class="select-control">
-              <option value="1">1週目 呼吸を固定</option>
-              <option value="2">2週目 足指接地</option>
-              <option value="3">3週目 キャット・カウ</option>
-              <option value="4">4週目 椅子軸方とデロード</option>
-              <option value="5">5週目 肩甲骨360度</option>
-              <option value="6">6週目 股関節ウェイブ</option>
-              <option value="7">7週目 腸腰筋マーチング</option>
-              <option value="8">8週目 橋のポーズとデロード</option>
-              <option value="9">9週目 初動落下</option>
-              <option value="10">10週目 スローモーションシャドー</option>
-              <option value="11">11週目 目閉じ立位バランス</option>
-              <option value="12">12週目 高速体幹とデロード</option>
-            </select>
-            <div class="week-card" id="weekCard"></div>
+        <p class="footer-mini">戻れる強さ・出力・反応・回復・継続を同時に残す</p>
+      </section>
 
-            <div class="day-tabs" id="dayTabs" aria-label="曜日">
-              <button type="button" data-day="mon">月</button>
-              <button type="button" data-day="tue">火</button>
-              <button type="button" data-day="wed">水</button>
-              <button type="button" data-day="thu">木</button>
-              <button type="button" data-day="fri">金</button>
-              <button type="button" data-day="sat">土</button>
-              <button type="button" data-day="sun">日</button>
-            </div>
-          </section>
+      <!-- CHECK -->
+      <section class="view" data-view="check">
+        <header class="bar">
+          <button class="bar__back" data-go="home" type="button">←</button>
+          <h2 class="bar__title">今日の判定</h2>
+        </header>
+        <p class="lead">3つのYES/NOで「今日のメニュー」が決まる。</p>
 
-          <section class="panel guard-panel">
-            <div class="section-heading compact">
-              <p class="eyebrow">停止条件</p>
-              <h2>今日はこれを守る</h2>
-            </div>
-            <ul id="guardList" class="guard-list"></ul>
-          </section>
-        </aside>
+        <div class="qa-list" id="qaList">
+          <!-- rendered by app.js -->
+        </div>
 
-        <section class="workbench">
-          <div class="visual-band">
-            <img id="sessionImage" src="assets/morning-clear.png" alt="低負荷ドリルの補助イメージ">
-            <div class="visual-copy">
-              <p class="eyebrow" id="sessionMode">今日のおすすめ</p>
-              <h2 id="visualTitle">次にやることだけを見る</h2>
-              <p id="visualText">判定と曜日に合わせて、実行する順番を絞ります。</p>
-            </div>
+        <div class="result-card" id="resultCard">
+          <div class="result-card__badge" id="resultBadge">緑</div>
+          <h3 class="result-card__title" id="resultTitle">緑判定</h3>
+          <p class="result-card__text" id="resultText">普通に実行。</p>
+          <p class="result-card__menu">今日のメニュー: <strong id="resultMenu">朝起動5分</strong></p>
+          <button class="cta" data-go="run" type="button">
+            <span class="cta__main">このメニューで始める</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- MENU LIST -->
+      <section class="view" data-view="menu">
+        <header class="bar">
+          <button class="bar__back" data-go="home" type="button">←</button>
+          <h2 class="bar__title">メニュー</h2>
+          <button class="bar__action" id="menuToggle" type="button">全部</button>
+        </header>
+        <div class="menu-list" id="menuList"></div>
+      </section>
+
+      <!-- RUN (1 step at a time) -->
+      <section class="view view--run" data-view="run">
+        <header class="bar bar--run">
+          <button class="bar__back" data-go="home" type="button">×</button>
+          <div class="bar__center">
+            <span class="bar__sub" id="runSessionTitle">朝起動5分</span>
+            <span class="bar__count" id="runStepCount">1 / 6</span>
+          </div>
+        </header>
+
+        <div class="progress-track"><span class="progress-bar" id="runProgress"></span></div>
+
+        <main class="run-body">
+          <img class="run-image" id="runImage" alt="" src="assets/morning-clear.png">
+          <h2 class="run-title" id="runTitle">背骨はまっすぐ</h2>
+          <p class="run-instruction" id="runInstruction">立位で足裏全体を床に置く。</p>
+
+          <div class="timer">
+            <output class="timer__display" id="timerOutput">00:40</output>
+            <button class="timer__button" id="timerButton" type="button">タイマー開始</button>
           </div>
 
-          <section class="principle-strip" aria-label="このアプリの使い方">
-            <div>
-              <span>テーマ</span>
-              <strong>最強は翌日も戻れる強さ</strong>
-              <p>出力、反応、回復、継続を同時に残す。</p>
-            </div>
-            <div>
-              <span>レポートは素材</span>
-              <strong>今日の1手だけ実行</strong>
-              <p>500源・750源の数字は威勢として扱い、今やる手順へ絞る。</p>
-            </div>
-            <div>
-              <span>画像は補助</span>
-              <strong>正確さはテキストで確認</strong>
-              <p>白背景の姿勢と矢印を見る。細部は手順カードを優先。</p>
-            </div>
-            <div>
-              <span>安全ゲート</span>
-              <strong>赤・前兆日は危険動作をロック</strong>
-              <p>見えても選べないメニューを作り、勢いでやらない。</p>
-            </div>
-          </section>
+          <details class="run-details">
+            <summary>動き方の詳細</summary>
+            <div class="run-details__body" id="runDetails"></div>
+          </details>
+        </main>
 
-          <section class="session-picker" aria-label="メニュー選択">
-            <div class="section-heading inline">
-              <div>
-                <p class="eyebrow">メニュー</p>
-                <h2 id="sessionPickerTitle">今日の候補</h2>
-              </div>
-              <button class="text-button" id="showAllButton" type="button">全部見る</button>
-            </div>
-            <div class="session-grid" id="sessionGrid"></div>
-          </section>
+        <footer class="run-foot">
+          <button class="foot-btn foot-btn--ghost" id="prevButton" type="button">戻る</button>
+          <button class="foot-btn foot-btn--primary" id="nextButton" type="button">できた → 次へ</button>
+        </footer>
+      </section>
 
-          <section class="guide-panel" aria-live="polite">
-            <div class="guide-header">
-              <div>
-                <p class="eyebrow" id="guideKicker">実行中</p>
-                <h2 id="guideTitle">朝起動5分</h2>
-              </div>
-              <div class="step-count" id="stepCount">1 / 6</div>
-            </div>
+      <!-- DONE -->
+      <section class="view view--done" data-view="done">
+        <div class="done-wrap">
+          <p class="done-eyebrow">完了</p>
+          <h2 class="done-title" id="doneSessionTitle">朝起動5分</h2>
+          <p class="done-text">おつかれさま。今日の刺激は十分。追い込まない。</p>
+          <p class="done-quote">最強は翌日も戻れる強さ。</p>
+          <button class="cta" data-go="home" type="button">
+            <span class="cta__main">ホームへ</span>
+          </button>
+          <button class="link-btn" data-go="menu" type="button">他のメニューを見る</button>
+        </div>
+      </section>
 
-            <div class="progress-track" aria-label="手順進捗">
-              <span id="progressBar"></span>
-            </div>
+      <!-- OSHIKURA -->
+      <section class="view" data-view="oshikura">
+        <header class="bar">
+          <button class="bar__back" data-go="home" type="button">←</button>
+          <h2 class="bar__title">押し蔵くん</h2>
+        </header>
+        <p class="lead">主役ではなく、戻すための補助。強く押すほど効くではない。</p>
 
-            <article class="step-card" id="stepCard"></article>
+        <div class="tab-row" id="oshikuraTabs">
+          <button class="tab" data-osh="neck" type="button">首肩</button>
+          <button class="tab" data-osh="forearm" type="button">前腕・手</button>
+          <button class="tab" data-osh="foot" type="button">足裏</button>
+          <button class="tab" data-osh="headache" type="button">片頭痛</button>
+          <button class="tab" data-osh="lesson" type="button">レッスン間</button>
+        </div>
+        <div class="oshikura-body" id="oshikuraBody"></div>
+      </section>
 
-            <div class="timer-box">
-              <div>
-                <p class="eyebrow">目安時間</p>
-                <output id="timerOutput">00:40</output>
-              </div>
-              <div class="timer-actions">
-                <button type="button" class="secondary-button" id="timerButton">タイマー開始</button>
-                <button type="button" class="ghost-button" id="timerResetButton">戻す</button>
-              </div>
-            </div>
+      <!-- WEEK PLAN -->
+      <section class="view" data-view="week">
+        <header class="bar">
+          <button class="bar__back" data-go="home" type="button">←</button>
+          <h2 class="bar__title">12週プラン</h2>
+        </header>
+        <p class="lead">毎週1個ずつだけ追加。デロード週は60-70%。</p>
+        <div class="week-list" id="weekList"></div>
+        <details class="note-collapse">
+          <summary>レッスン間1分キュー（10種）</summary>
+          <div class="cue-list" id="cueList"></div>
+        </details>
+      </section>
 
-            <div class="nav-actions">
-              <button type="button" class="secondary-button" id="prevButton">戻る</button>
-              <button type="button" class="primary-button" id="nextButton">できた。次へ</button>
-            </div>
-          </section>
-
-          <section class="extras">
-            <div class="quick-panel">
-              <div class="section-heading compact">
-                <p class="eyebrow">別モード</p>
-                <h2>押し蔵くん部位別</h2>
-              </div>
-              <label class="select-label" for="oshikuraSelect">今ケアしたい場所</label>
-              <select id="oshikuraSelect" class="select-control">
-                <option value="neck">首肩・肩甲骨まわり</option>
-                <option value="forearm">前腕・手指</option>
-                <option value="foot">足裏・足首</option>
-                <option value="headache">片頭痛前兆・顔まわり</option>
-                <option value="lesson">レッスン間30秒</option>
-              </select>
-              <div class="oshikura-card" id="oshikuraProtocol"></div>
-            </div>
-            <div class="quick-panel">
-              <div class="section-heading compact">
-                <p class="eyebrow">レッスン間</p>
-                <h2>1分キュー</h2>
-              </div>
-              <div class="cue-list" id="cueList"></div>
-            </div>
-            <div class="quick-panel">
-              <div class="section-heading compact">
-                <p class="eyebrow">記録</p>
-                <h2>今日の3行</h2>
-              </div>
-              <label class="note-label">代表場面
-                <input id="noteScene" type="text" placeholder="1つだけ">
-              </label>
-              <label class="note-label">原因
-                <select id="noteCause">
-                  <option value="">選ぶ</option>
-                  <option>距離</option>
-                  <option>視線</option>
-                  <option>足</option>
-                  <option>呼吸</option>
-                  <option>力み</option>
-                </select>
-              </label>
-              <label class="note-label">次回試すこと
-                <input id="noteNext" type="text" placeholder="1つだけ">
-              </label>
-            </div>
-          </section>
-        </section>
-      </main>
     </div>
-
     <script src="app.js"></script>
   </body>
 </html>
