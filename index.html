@@ -14,37 +14,42 @@
       <section class="view view--home active" data-view="home">
         <header class="hero">
           <p class="hero__eyebrow">最強への道</p>
-          <h1 class="hero__title" id="homeRecommendTitle">朝起動 5分</h1>
-          <p class="hero__sub" id="homeRecommendSub">普通の日の標準</p>
-          <p class="hero__motto">翌日も戻れる強さ</p>
+          <h1 class="hero__title">今日の3部</h1>
+          <p class="hero__motto">★必須だけで最低ライン。残りは余裕で。</p>
         </header>
 
-        <div class="status-chip" id="homeStatusChip">
-          <span class="status-chip__dot"></span>
-          <span class="status-chip__text">緑判定</span>
+        <div class="cond-row" id="condRow" role="group" aria-label="今日の身体">
+          <button class="cond" data-cond="normal" type="button">普通</button>
+          <button class="cond" data-cond="recover" type="button">回復寄り</button>
+          <button class="cond" data-cond="migraine" type="button">前兆あり</button>
         </div>
 
-        <button class="cta" id="goRunButton" type="button">
-          <span class="cta__main">今すぐ始める</span>
-          <span class="cta__sub" id="homeStepCount">6 ステップ・約5分</span>
-        </button>
+        <div class="three-cta">
+          <button class="big-cta" data-go-session="morning" type="button">
+            <span class="big-cta__corner">朝</span>
+            <span class="big-cta__main">朝トレ</span>
+            <span class="big-cta__sub" id="morningSub">必須3分・全部約8分</span>
+          </button>
+          <button class="big-cta" data-go-session="main" type="button">
+            <span class="big-cta__corner">修</span>
+            <span class="big-cta__main">修行</span>
+            <span class="big-cta__sub" id="mainSub">必須20分・全部約60分</span>
+          </button>
+          <button class="big-cta" data-go-session="bedtime" type="button">
+            <span class="big-cta__corner">夜</span>
+            <span class="big-cta__main">寝る前</span>
+            <span class="big-cta__sub" id="bedtimeSub">必須4分・全部約10分</span>
+          </button>
+        </div>
 
         <div class="home-grid">
-          <button class="tile" data-go="check" type="button">
-            <span class="tile__icon">●</span>
-            <span class="tile__label">今日の判定</span>
-          </button>
-          <button class="tile" data-go="menu" type="button">
-            <span class="tile__icon">≡</span>
-            <span class="tile__label">メニュー</span>
-          </button>
           <button class="tile" data-go="oshikura" type="button">
             <span class="tile__icon">◯</span>
-            <span class="tile__label">押し蔵くん</span>
+            <span class="tile__label">押し蔵くん（部位別）</span>
           </button>
           <button class="tile" data-go="week" type="button">
             <span class="tile__icon">12</span>
-            <span class="tile__label">12週プラン</span>
+            <span class="tile__label">12週プラン（参考）</span>
           </button>
         </div>
 
@@ -62,55 +67,24 @@
           </div>
         </details>
 
-        <p class="footer-mini">戻れる強さ・出力・反応・回復・継続を同時に残す</p>
+        <p class="footer-mini">出力・反応・回復・継続を同時に残す。やりすぎは最強から遠い。</p>
       </section>
 
-      <!-- CHECK -->
-      <section class="view" data-view="check">
-        <header class="bar">
-          <button class="bar__back" data-go="home" type="button">←</button>
-          <h2 class="bar__title">今日の判定</h2>
-        </header>
-        <p class="lead">3つのYES/NOで「今日のメニュー」が決まる。</p>
-
-        <div class="qa-list" id="qaList">
-          <!-- rendered by app.js -->
-        </div>
-
-        <div class="result-card" id="resultCard">
-          <div class="result-card__badge" id="resultBadge">緑</div>
-          <h3 class="result-card__title" id="resultTitle">緑判定</h3>
-          <p class="result-card__text" id="resultText">普通に実行。</p>
-          <p class="result-card__menu">今日のメニュー: <strong id="resultMenu">朝起動5分</strong></p>
-          <button class="cta" data-go="run" type="button">
-            <span class="cta__main">このメニューで始める</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- MENU LIST -->
-      <section class="view" data-view="menu">
-        <header class="bar">
-          <button class="bar__back" data-go="home" type="button">←</button>
-          <h2 class="bar__title">メニュー</h2>
-          <button class="bar__action" id="menuToggle" type="button">全部</button>
-        </header>
-        <div class="menu-list" id="menuList"></div>
-      </section>
-
-      <!-- RUN (1 step at a time) -->
+      <!-- RUN -->
       <section class="view view--run" data-view="run">
         <header class="bar bar--run">
           <button class="bar__back" data-go="home" type="button">×</button>
           <div class="bar__center">
-            <span class="bar__sub" id="runSessionTitle">朝起動5分</span>
-            <span class="bar__count" id="runStepCount">1 / 6</span>
+            <span class="bar__sub" id="runSessionTitle">朝トレ</span>
+            <span class="bar__count" id="runStepCount">1 / 8</span>
           </div>
+          <div class="bar__spacer"></div>
         </header>
 
         <div class="progress-track"><span class="progress-bar" id="runProgress"></span></div>
 
         <main class="run-body">
+          <div class="run-tag-row" id="runTagRow"></div>
           <img class="run-image" id="runImage" alt="" src="assets/morning-clear.png">
           <h2 class="run-title" id="runTitle">背骨はまっすぐ</h2>
           <p class="run-instruction" id="runInstruction">立位で足裏全体を床に置く。</p>
@@ -128,7 +102,8 @@
 
         <footer class="run-foot">
           <button class="foot-btn foot-btn--ghost" id="prevButton" type="button">戻る</button>
-          <button class="foot-btn foot-btn--primary" id="nextButton" type="button">できた → 次へ</button>
+          <button class="foot-btn foot-btn--skip" id="skipButton" type="button">飛ばす</button>
+          <button class="foot-btn foot-btn--primary" id="nextButton" type="button">できた</button>
         </footer>
       </section>
 
@@ -136,13 +111,12 @@
       <section class="view view--done" data-view="done">
         <div class="done-wrap">
           <p class="done-eyebrow">完了</p>
-          <h2 class="done-title" id="doneSessionTitle">朝起動5分</h2>
-          <p class="done-text">おつかれさま。今日の刺激は十分。追い込まない。</p>
+          <h2 class="done-title" id="doneSessionTitle">朝トレ</h2>
+          <p class="done-text" id="doneText">必須◯個・任意◯個できた。今日の刺激は十分。</p>
           <p class="done-quote">最強は翌日も戻れる強さ。</p>
           <button class="cta" data-go="home" type="button">
             <span class="cta__main">ホームへ</span>
           </button>
-          <button class="link-btn" data-go="menu" type="button">他のメニューを見る</button>
         </div>
       </section>
 
@@ -164,13 +138,13 @@
         <div class="oshikura-body" id="oshikuraBody"></div>
       </section>
 
-      <!-- WEEK PLAN -->
+      <!-- WEEK -->
       <section class="view" data-view="week">
         <header class="bar">
           <button class="bar__back" data-go="home" type="button">←</button>
           <h2 class="bar__title">12週プラン</h2>
         </header>
-        <p class="lead">毎週1個ずつだけ追加。デロード週は60-70%。</p>
+        <p class="lead">毎週1個ずつだけ追加。デロード週は60-70%。参考用。</p>
         <div class="week-list" id="weekList"></div>
         <details class="note-collapse">
           <summary>レッスン間1分キュー（10種）</summary>
